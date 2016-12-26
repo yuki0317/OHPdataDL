@@ -1,0 +1,5 @@
+About OHPdataDL.py
+
+GCMT ID のリストを基にOHPのHPからデータをダウンロードする。
+GCMT解のorigin timeの20分前から2時間長のデータをダウンロードする。
+
