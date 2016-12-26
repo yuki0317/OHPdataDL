@@ -55,12 +55,12 @@ for line in lines:
 
 	driver.findElement(By.name("showAvailableStations")).click()
 
-	Selector station1 = new Selector(driver.findElement(By.name("stationID")));
-	Selector station2 = new Selector(driver.findElement(By.name("stationID")));
-	Selector station3 = new Selector(driver.findElement(By.name("stationID")));
-	Selector station4 = new Selector(driver.findElement(By.name("stationID")));
-	Selector station5 = new Selector(driver.findElement(By.name("stationID")));
-	Selector station6 = new Selector(driver.findElement(By.name("stationID")));
+	Select station1 = new Selector(driver.findElement(By.name("stationID")));
+	Select station2 = new Selector(driver.findElement(By.name("stationID")));
+	Select station3 = new Selector(driver.findElement(By.name("stationID")));
+	Select station4 = new Selector(driver.findElement(By.name("stationID")));
+	Select station5 = new Selector(driver.findElement(By.name("stationID")));
+	Select station6 = new Selector(driver.findElement(By.name("stationID")));
 
 	station1.selectByVisibleText("PS.BAG");
 	station1.selectByVisibleText("PS.KSI");
@@ -80,4 +80,4 @@ for line in lines:
 	
 	driver.findElement(By.name("SEED")).click()
 
-	driver.findElement(By.name("")).click()
+	driver.findElement(By.name("download")).click()
