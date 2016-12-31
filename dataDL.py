@@ -4,7 +4,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.select import Select
-import re
+import datetime
+import time
 
 gcmtlist = open('gcmtlistFile.txt')
 lines = gcmtlist.readlines()
@@ -26,58 +27,73 @@ for line in lines:
 #		else:
 #			print('something wrong!')
 #	elif len(line) == 13:
-	year = line[0:3]
-	month = line[4:5]
-	day = line[6:7]
-	hour = line[8:9]
-	minu = line[10:11]
+	year = line[0:4]
+	month = line[4:6]
+	day = line[6:8]
+	hour = line[8:10]
+	minu = line[10:12]
+
+	print(year, month, day, hour, minu)
+	origintime = datetime.datetime(int(year), int(month), int(day), hour=int(hour), minute=int(minu))
+	starttime = origintime - datetime.timedelta(minutes=20)
+	endtime = starttime + datetime.timedelta(hours=2)
 #	else:
 #		print('something wrong!')
 
-	Select fromYear = new Selector(driver.findElement(By.name("fromYear")));
-	Select fromMonth = new Selector(driver.findElement(By.name("fromMonth")));
-	Select fromDay = new Selector(drive.findElement(By.name("fromDay")));
-	Select fromHour = new Selector(drive.findElement(By.name("fromHour")));
-	Select fromMin = new Selector(drive.findElement(By.name("fromMin")));
+	fromYear = Select(driver.find_element_by_name("fromYear"));
+	fromMonth = Select(driver.find_element_by_name("fromMonth"));
+	fromDay = Select(driver.find_element_by_name("fromDay"));
+	fromHour = Select(driver.find_element_by_name("fromHour"));
+	fromMin = Select(driver.find_element_by_name("fromMinute"));
 
-	Select toYear = new Selector(driver.findElement(By.name("toYear")));
-	Select toMonth = new Selector(driver.findElement(By.name("toMonth")));
-	Select toDay = new Selector(drive.findElement(By.name("toDay")));
-	Select toHour = new Selector(drive.findElement(By.name("toHour")));
-	Select toMin = new Selector(drive.findElement(By.name("toMin")));
+	toYear = Select(driver.find_element_by_name("toYear"));
+	toMonth = Select(driver.find_element_by_name("toMonth"));
+	toDay = Select(driver.find_element_by_name("toDay"));
+	toHour = Select(driver.find_element_by_name("toHour"));
+	toMin = Select(driver.find_element_by_name("toMinute"));
+#
+	fromYear.select_by_visible_text(str(starttime.year));
+	fromMonth.select_by_visible_text(str(starttime.month));
+	fromDay.select_by_visible_text(str(starttime.day));
+	fromHour.select_by_visible_text(str(starttime.hour));
+	fromMin.select_by_visible_text(str(starttime.minute));
+	toYear.select_by_visible_text(str(endtime.year));
+	toMonth.select_by_visible_text(str(endtime.month));
+	toDay.select_by_visible_text(str(endtime.day));
+	toHour.select_by_visible_text(str(endtime.hour));
+	toMin.select_by_visible_text(str(endtime.minute));
+#
+	driver.find_element_by_name("showAvailableStations").click()
+	time.sleep(5)
 
-	minu2 = int(minu) - 20
-	fromYear.selectByVisibleText(year);
-	fromMonth.selectByVisibleText(month);
-	fromDay.selectByVisibleText(day);
-	fromHour.selectByVisibleText(hour);
-	fromMin.selectByVisibleText(str(minu2))
+	station = Select(driver.find_element_by_name('stationID'));
+	station1 = Select(driver.find_element_by_name('stationID'));
+	station2 = Select(driver.find_element_by_name("stationID"));
+	station3 = Select(driver.find_element_by_name("stationID"));
+	station4 = Select(driver.find_element_by_name("stationID"));
+	station5 = Select(driver.find_element_by_name("stationID"));
+	station6 = Select(driver.find_element_by_name("stationID"));
+#
+#	station.select_by_value('"0"')
+	station1.select_by_visible_text(str("PS.BAG"));
+	station2.select_by_visible_text('PS.KSI');
+	station3.select_by_visible_text('PS.PLVO');
+	station4.select_by_visible_text('PS.PSI');
+	station5.select_by_visible_text('PS.SPVO');
+	station6.select_by_visible_text('PS.VIVO');
+#	
 
-	driver.findElement(By.name("showAvailableStations")).click()
+	component1 = Select(driver.find_element_by_name("channelID"));
+	component2 = Select(driver.find_element_by_name("channelID"));
+	component3 = Select(driver.find_element_by_name("channelID"));
+#
+	component1.select_by_visible_text('BHE');
+	component2.select_by_visible_text('BHN');
+	component3.select_by_visible_text('BHZ');
+#	
+	driver.find_element_by_id("fseed").click()
+	time.sleep(3)
 
-	Select station1 = new Selector(driver.findElement(By.name("stationID")));
-	Select station2 = new Selector(driver.findElement(By.name("stationID")));
-	Select station3 = new Selector(driver.findElement(By.name("stationID")));
-	Select station4 = new Selector(driver.findElement(By.name("stationID")));
-	Select station5 = new Selector(driver.findElement(By.name("stationID")));
-	Select station6 = new Selector(driver.findElement(By.name("stationID")));
-
-	station1.selectByVisibleText("PS.BAG");
-	station1.selectByVisibleText("PS.KSI");
-	station1.selectByVisibleText("PS.PLVO");
-	station1.selectByVisibleText("PS.PSI");
-	station1.selectByVisibleText("PS.SPVO");
-	station1.selectByVisibleText("PS.VIVO");
-	
-	Selector component1 = new Selector(driver.findElement(By.name("channelID")));
-	Selector component2 = new Selector(driver.findElement(By.name("channelID")));
-	Selector component3 = new Selector(driver.findElement(By.name("channelID")));
-
-	component1.selectByVisibleText("BHE");
-	component2.selectByVisibleText("BHN");
-	component3.selectByVisibleText("BHZ");
-
-	
-	driver.findElement(By.name("SEED")).click()
-
-	driver.findElement(By.name("download")).click()
+	driver.find_element_by_name("download").click()
+	time.sleep(7)
+driver.close()
